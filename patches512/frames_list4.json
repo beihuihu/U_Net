@@ -1,0 +1,1 @@
+{"training_frames": ["ndwi_123.png", "ndwi_169.png", "ndwi_264.png", "ndwi_112.png", "ndwi_317.png", "ndwi_25.png", "ndwi_385.png", "ndwi_252.png", "ndwi_294.png"], "testing_frames": ["ndwi_122.png", "ndwi_262.png", "ndwi_382.png", "ndwi_54.png"], "validation_frames": ["ndwi_279.png", "ndwi_128.png", "ndwi_129.png"]}
