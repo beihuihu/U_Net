@@ -11,15 +11,15 @@ class Configuration:
     '''
     def __init__(self):
         # For reading the training areas and polygons 
-        self.training_base_dir = r'I:\lakemapping\U_Net'
-        self.training_area_fn = 'SampleAnnotations\\area'         
+        self.training_base_dir = r'D:\lakemapping\U_Net'
+        self.training_area_fn = 'D:\lakemapping\2_dataset\SampleAnnotations\\area'         
         self.training_polygon_fn = 'SampleAnnotations\\polygon' 
-        self.type_num=7
+        self.type_num=6
 
         # For reading images
         self.bands0 = [0]# If raster has multiple channels, then bands will be [0, 1, ...] otherwise simply [0]
         self.bands1 = [0,1,2,3]
-        self.raw_image_base_dir =r'G:\sample_img_2'
+        self.raw_image_base_dir =r'G:\sample_img_3'
         self.raw_image_file_type = '.tif'
         self.raw_NDWI_image_prefix = 'ndwi_int8'
         self.raw_bands_image_prefix = 'bands_int16'
