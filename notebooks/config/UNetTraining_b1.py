@@ -6,19 +6,15 @@ import os
 # Configuration of the parameters for the 2-UNetTraining.ipynb notebook
 class Configuration:
     def __init__(self):
-        self.base_dir = r'F:\lakemapping\U_Net'
-        self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
+        self.base_dir = r'D:\lakemapping\U_Net'
+#         self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
+        self.dataset_dir=r'D:\lakemapping\2_dataset\patchesReshape550'
         self.image_type = '.png'       
         self.NDWI_fn = 'ndwi'
         self.annotation_fn = 'annotation'
-        self.type_num=5
+        self.type_num=6
         self.patch_size = (512,512,2) # Height * Width * (Input or Output) channels  
-        self.patch_dir = os.path.join(self.base_dir,'patches{}'.format(self.patch_size[0])) 
         self.step_size = (512,512)# # When stratergy == sequential, then you need the step_size as well
-        
-        # The training areas are divided into training, validation and testing set. Note that training area can have different sizes, so it doesn't guarantee that the final generated patches (when using sequential stratergy) will be in the same ratio.
-        self.test_ratio = 0.2
-        self.val_ratio = 0.25 
         
         # Probability with which the generated patches should be normalized  0 -> don't normalize,    1 -> normalize all 
         self.normalize = 0
@@ -28,8 +24,8 @@ class Configuration:
         self.input_label_channel = [1]
 
         # CNN model related variables used in the notebook
-        self.BATCH_SIZE = 8
-        self.NB_EPOCHS = 50
+        self.BATCH_SIZE = 16
+        self.NB_EPOCHS = 100
 
         # number of validation images to use
         self.VALID_IMG_COUNT = 260       
