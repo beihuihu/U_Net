@@ -19,7 +19,7 @@ class Configuration:
         # For reading images
         self.bands0 = [0]# If raster has multiple channels, then bands will be [0, 1, ...] otherwise simply [0]
         self.bands1 = [0,1,2,3]
-        self.raw_image_base_dir =r'G:\sample_img_3'
+        self.raw_image_base_dir =r'G:\5_lakemapping\sample_img_3'
         self.raw_image_file_type = '.tif'
         self.raw_NDWI_image_prefix = 'ndwi_int8'
         self.raw_bands_image_prefix = 'bands_int16'

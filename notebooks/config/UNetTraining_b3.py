@@ -7,7 +7,7 @@ import os
 class Configuration:
     def __init__(self):
         self.base_dir = r'D:\lakemapping\U_Net'
-        self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
+        self.dataset_dir=r'D:\lakemapping\2_dataset\patchesReshape588'#os.path.join(self.base_dir,'patchesReshape')
         self.image_type = '.png'       
         self.NDWI_fn = 'ndwi'
         self.green_fn = 'green'
@@ -26,10 +26,10 @@ class Configuration:
 
         # CNN model related variables used in the notebook
         self.BATCH_SIZE = 16
-        self.NB_EPOCHS = 50
+        self.NB_EPOCHS = 100
 
         # number of validation images to use
-        self.VALID_IMG_COUNT = 260       
+        self.VALID_IMG_COUNT = 100       
         # maximum number of steps_per_epoch in training
-        self.MAX_TRAIN_STEPS = 800 #steps_per_epoch=(num_train/batch_size)
+        self.MAX_TRAIN_STEPS = 300 #steps_per_epoch=(num_train/batch_size)
         self.model_path = os.path.join(self.base_dir, 'saved_models/UNet') 
