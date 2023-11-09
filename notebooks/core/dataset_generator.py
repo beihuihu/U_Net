@@ -75,7 +75,7 @@ class DataGenerator():
                 return (img, ann_joint)
 
     # Return a batch of training and label images, generated randomly
-    def random_patch(self, BATCH_SIZE):
+    def random_patch(self, BATCH_SIZE,percentages):
         """Generate patches from random location in randomly chosen frames.
         Args:
             BATCH_SIZE (int): Number of patches to generate (sampled independently). 8
@@ -89,7 +89,10 @@ class DataGenerator():
 #                 patches.append(patch)
 #                 count=count+1
         for i in range(BATCH_SIZE):
-            frame = np.random.choice(self.frames)
+            if percentages==None:
+                frame = np.random.choice(self.frames,replace=False)
+            else:
+                frame = np.random.choice(self.frames,replace=False,p=percentages)
             patch = frame.random_patch(self.patch_size)
             patches.append(patch)
         data = np.array(patches)
@@ -97,7 +100,7 @@ class DataGenerator():
         ann_joint = data[..., self.annotation_channel]#[1]
         return (img, ann_joint)
     
-    def random_generator(self, BATCH_SIZE, normalize = 0):
+    def random_generator(self, BATCH_SIZE,percentages = None, normalize = 0):
         """Generator for random patches, yields random patches from random location in randomly chosen frames.
         Args:
             BATCH_SIZE (int): Number of patches to generate in each yield (sampled independently).  
@@ -106,7 +109,7 @@ class DataGenerator():
         seq = imageAugmentationWithIAA()
 
         while True:
-            X, y = self.random_patch(BATCH_SIZE)
+            X, y = self.random_patch(BATCH_SIZE,percentages)
             if self.augmenter == 'iaa':   #augmenter = 'iaa'  
                 seq_det = seq.to_deterministic()
                 X = seq_det.augment_images(X)

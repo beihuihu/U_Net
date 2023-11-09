@@ -29,7 +29,7 @@ class Configuration:
         self.NB_EPOCHS = 100
 
         # number of validation images to use
-        self.VALID_IMG_COUNT = 100       
+        self.VALID_IMG_COUNT = 174       
         # maximum number of steps_per_epoch in training
-        self.MAX_TRAIN_STEPS = 300 #steps_per_epoch=(num_train/batch_size)
+        self.MAX_TRAIN_STEPS = 532 #steps_per_epoch=(num_train/batch_size)
         self.model_path = os.path.join(self.base_dir, 'saved_models/UNet') 
