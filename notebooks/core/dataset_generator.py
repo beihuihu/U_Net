@@ -16,8 +16,6 @@ def imageAugmentationWithIAA():
         iaa.Fliplr(0.5),  # horizontally flip 50% of all images 
         iaa.Flipud(0.2),  # vertically flip 20% of all images 
         sometimes(iaa.Crop(percent=(0, 0.1))),  # random crops
-#         sometimes(iaa.LinearContrast((0.3, 1.2)), 0.3),
-#         iaa.Add(value=(-0.5,0.5),per_channel=True),
         sometimes(iaa.PiecewiseAffine(0.05), 0.3),
         sometimes(iaa.PerspectiveTransform(0.01), 0.1)
     ],
@@ -46,11 +44,9 @@ class DataGenerator():
     # Return all training and label images, generated sequentially with the given step size
     def all_sequential_patches(self, step_size):
         """Generate all patches from all assigned frames sequentially.
-
             step_size (tuple(int,int)): Size of the step when generating frames.
         """
         seq = imageAugmentationWithIAA()
-            
         patches = []
         for frame in self.frames:
             ps= frame.sequential_patches(self.patch_size, step_size)
@@ -59,20 +55,10 @@ class DataGenerator():
         img = data[..., self.input_image_channel]#self.input_image_channel = [0]
         ann = data[..., self.annotation_channel]#[1]
         if self.augmenter == 'iaa':   #augmenter = 'iaa'  
-                seq_det = seq.to_deterministic()
-                img = seq_det.augment_images(img)
-    
-                # ann would have one channel, i.e. annotations. We need to augmenty for operations such as crop and transform
-                ann = seq_det.augment_images(ann) 
-                # Some augmentations can change the value of y, so we re-assign values just to be sure.
-                ann =  ann[...,[0]]
-                ann_joint=ann
-                return (img, ann_joint)
-        else:
-    
-                ann =  ann[...,[0]]
-                ann_joint=ann
-                return (img, ann_joint)
+            seq_det = seq.to_deterministic()
+            img = seq_det.augment_images(img)
+            ann = seq_det.augment_images(ann) 
+        return (img, ann)
 
     # Return a batch of training and label images, generated randomly
     def random_patch(self, BATCH_SIZE,percentages):
@@ -81,20 +67,16 @@ class DataGenerator():
             BATCH_SIZE (int): Number of patches to generate (sampled independently). 8
         """
         patches = []
-#         count=0
-#         while count<BATCH_SIZE:
-#             frame = random.sample(self.frames,1)
-#             patch = frame[0].random_patch(self.patch_size, normalize)
-#             if patch[1].any()>0:
-#                 patches.append(patch)
-#                 count=count+1
         for i in range(BATCH_SIZE):
-            if percentages==None:
-                frame = np.random.choice(self.frames,replace=False)
-            else:
-                frame = np.random.choice(self.frames,replace=False,p=percentages)
+            frame = np.random.choice(self.frames,p=percentages)
             patch = frame.random_patch(self.patch_size)
             patches.append(patch)
+#             while True:
+#                 patch = frame.random_patch(self.patch_size)
+#                 if patch[...,self.annotation_channel].any()>0:
+#                     patches.append(patch)
+#                     break
+             
         data = np.array(patches)
         img = data[..., self.input_image_channel]#self.input_image_channel = [0]
         ann_joint = data[..., self.annotation_channel]#[1]
@@ -113,18 +95,5 @@ class DataGenerator():
             if self.augmenter == 'iaa':   #augmenter = 'iaa'  
                 seq_det = seq.to_deterministic()
                 X = seq_det.augment_images(X)
-    
-                # y would have one channel, i.e. annotations. We need to augmenty for operations such as crop and transform
                 y = seq_det.augment_images(y) 
-                # Some augmentations can change the value of y, so we re-assign values just to be sure.
-                ann =  y[...,[0]]
-#                 ann[ann<0.5] = 0
-#                 ann[ann>=0.5] = 1
-                
-                ann_joint=ann
-                yield X, ann_joint
-            else:
-    
-                ann =  y[...,[0]]
-                ann_joint=ann
-                yield X, ann_joint
+            yield X, y

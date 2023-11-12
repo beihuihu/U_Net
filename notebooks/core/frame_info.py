@@ -94,11 +94,11 @@ class FrameInfo:
         xy = [(i, j) for i in x for j in y]
         img_patches = []
         for i, j in xy:
-#             if not img_patch[...,1].all()>0:
-#                  img_patches.append(img_patch)
             img_patch = self.getPatch(i, j, patch_size, ic)
+#             if img_patch[...,-1].any()>0:
+#                  img_patches.append(img_patch)
             img_patches.append(img_patch)
-        # print(len(img_patches))
+#         print(len(img_patches))
         return (img_patches)
     
     # Returns a single patch, startring at a random image

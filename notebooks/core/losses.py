@@ -23,9 +23,8 @@ def tversky(y_true, y_pred, alpha=0.5, beta=0.5):
     tp = K.sum(y_true_pos*y_pred_pos)
     fp = alpha * K.sum(y_true_pos * (1 - y_pred_pos))
     fn = beta * K.sum((1 - y_true_pos) * y_pred_pos)
-    EPSILON = 1
-    numerator = tp + EPSILON
-    denominator = tp + fp + fn + EPSILON
+    numerator = tp + + K.epsilon()
+    denominator = tp + fp + fn + + K.epsilon()
     score = numerator / denominator
     return 1.0 - score
 
@@ -41,25 +40,19 @@ def accuracy(y_true, y_pred):#Calculates how often predictions equal labels.
     y_pred = K.flatten(y_pred)
     return K.equal(K.round(y_t), K.round(y_pred))#Accuracy =  (TP + TN) / (TP + TN + FP+ FN) 
 
-def dice_coef(y_true, y_pred, smooth=0.0000001):
+def dice_coef(y_true, y_pred):
     """compute dice coef"""
-#     y_t = y_true[...,0]
-#     y_t = y_t[...,np.newaxis]
-#     intersection = K.sum(K.abs(y_t * y_pred), axis=-1)
-#     union = K.sum(y_t, axis=-1) + K.sum(y_pred, axis=-1)
-#     return K.mean((2. * intersection + smooth) / (union + smooth), axis=-1)
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(y_true_f * y_pred_f)
     return (2. * intersection + K.epsilon()) / (K.sum(y_true_f) + K.sum(y_pred_f) + K.epsilon())
 
 def generalized_dice_coefficient(y_true, y_pred):
-    smooth = 1.
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(y_true_f * y_pred_f)
-    score = (2. * intersection + smooth) / (
-                K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
+    score = (2. * intersection + + K.epsilon()) / (
+                K.sum(y_true_f) + K.sum(y_pred_f) + + K.epsilon())
     return score
 
 def dice_loss(y_true, y_pred):
@@ -119,15 +112,7 @@ def recall(y_t, y_pred):#recall = TP / (TP + FN)
 #     y_t = y_t[...,np.newaxis]
     tp = true_positives(y_t, y_pred)
     fn = false_negatives(y_t, y_pred)
-    return K.sum(tp) / (K.sum(tp) + K.sum(fn))
-
-def specificity(y_t, y_pred):
-    """compute specificity"""
-#     y_t = y_true[...,0]
-#     y_t = y_t[...,np.newaxis]
-    tn = true_negatives(y_t, y_pred)
-    fp = false_positives(y_t, y_pred)
-    return K.sum(tn) / (K.sum(tn) + K.sum(fp))
+    return K.sum(tp) / (K.sum(tp) + K.sum(fn)+ K.epsilon())
 
 def precision(y_t, y_pred):
     """compute precision"""
@@ -135,4 +120,4 @@ def precision(y_t, y_pred):
 #     y_t = y_t[...,np.newaxis]
     tp = true_positives(y_t, y_pred)
     fp = false_positives(y_t, y_pred)
-    return K.sum(tp) / (K.sum(tp) + K.sum(fp))
+    return K.sum(tp) / (K.sum(tp) + K.sum(fp)+ K.epsilon())
