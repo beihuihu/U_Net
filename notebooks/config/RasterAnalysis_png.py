@@ -11,7 +11,7 @@ class Configuration:
     '''
     def __init__(self):
         
-        self.input_image_dir = r'D:\lakemapping\4_predition\val'
+        self.input_image_dir = r'D:\lakemapping\2_dataset\patchesReshape550\test'
         self.input_image_type = '.png'
         self.ndwi_fn_st = 'ndwi'
         self.red_fn_st = 'red'
@@ -19,14 +19,15 @@ class Configuration:
         self.green_fn_st = 'green'
         self.swir_fn_st = 'swir'
         self.type_num=6
-        self.band_num=1
-        self.trained_model_path = r'D:\lakemapping\U_Net\saved_models\UNet\lakes_20231101-2140_AdaDelta_dice_loss_01_512.h5'
+        self.band_num=3
+        self.ignore_edge_width=50
+        self.trained_model_path = r'D:\lakemapping\U_Net\saved_models\UNet\lakes_20231028-1942_AdaDelta_dice_loss_0123_512.h5'
         print('self.trained_model_path:', self.trained_model_path)
         
         self.output_image_type = '.tif'
-        self.output_dir = r'D:\lakemapping\4_predition\1band\validation'
+        self.output_dir = r'D:\lakemapping\4_predition\sample550\test'
         
-        self.output_prefix = 'predition_b1_'  
+        self.output_prefix = 'predition_b3_'  
         self.output_shapefile_type = '.shp'
         self.overwrite_analysed_files =False
         self.output_dtype='uint8'

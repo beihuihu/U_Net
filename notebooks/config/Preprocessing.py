@@ -11,7 +11,7 @@ class Configuration:
     '''
     def __init__(self):
         # For reading the training areas and polygons 
-        self.training_base_dir = r'D:\lakemapping\U_Net'
+        self.training_base_dir = r'D:\lakemapping\2_dataset'
         self.training_area_fn = 'D:\lakemapping\2_dataset\SampleAnnotations\\area'         
         self.training_polygon_fn = 'SampleAnnotations\\polygon' 
         self.type_num=6

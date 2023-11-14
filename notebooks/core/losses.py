@@ -51,9 +51,10 @@ def generalized_dice_coefficient(y_true, y_pred):
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(y_true_f * y_pred_f)
-    score = (2. * intersection + + K.epsilon()) / (
-                K.sum(y_true_f) + K.sum(y_pred_f) + + K.epsilon())
+    score = (2. * intersection + K.epsilon()) / (
+                K.sum(y_true_f) + K.sum(y_pred_f) + K.epsilon())
     return score
+
 
 def dice_loss(y_true, y_pred):
     """compute dice loss"""
