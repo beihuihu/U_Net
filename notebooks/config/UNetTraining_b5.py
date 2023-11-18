@@ -10,8 +10,10 @@ class Configuration:
         # For reading the NDWI and annotated images generated in the Preprocessing step.
         # In most cases, they will take the same value as in the config/Preprocessing.py
         
-        self.base_dir = r'D:\lakemapping\U_Net'
-        self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
+        # self.base_dir = r'D:\lakemapping\U_Net'
+        # self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
+        self.base_dir = r'/media/nkd/backup/5_lakemapping/U_Net'
+        self.dataset_dir=r'/media/nkd/backup/5_lakemapping/sample600/patchesReshape'
         self.image_type = '.png'       
         self.NDWI_fn = 'ndwi'
         self.red_fn = 'red'
@@ -31,11 +33,11 @@ class Configuration:
         self.input_label_channel = [5]
 
         # CNN model related variables used in the notebook
-        self.BATCH_SIZE = 16
-        self.NB_EPOCHS = 50
+        self.BATCH_SIZE = 32
+        self.NB_EPOCHS = 150
 
         # number of validation images to use
-        self.VALID_IMG_COUNT = 260       
+        self.VALID_IMG_COUNT = 88#186       
         # maximum number of steps_per_epoch in training
-        self.MAX_TRAIN_STEPS = 800 #steps_per_epoch=(num_train/batch_size)
+        self.MAX_TRAIN_STEPS = 267#534 #steps_per_epoch=(num_train/batch_size)
         self.model_path = os.path.join(self.base_dir, 'saved_models/UNet') 

@@ -3,8 +3,8 @@
 
 
 
-# from tensorflow.keras.optimizers import Adam, Adadelta, Adagrad, Nadam
-from tensorflow.keras.optimizers.legacy import Adam,Adadelta, Adagrad, Nadam
+from tensorflow.keras.optimizers import Adam, Adadelta, Adagrad, Nadam
+# from tensorflow.keras.optimizers.legacy import Adam,Adadelta, Adagrad, Nadam
 
 # Optimezers; https://keras.io/optimizers/  
 adaDelta = Adadelta(learning_rate=1, rho=0.95, epsilon=None, decay=0.0)

@@ -26,7 +26,7 @@ def display_images(img, titles=None, cmap=None, norm=None, interpolation=None):
 #     plt.suptitle(titles)
 #     plt.show()
 
-def plot(hist,optimizerName,lossName, patchSize, epochNum, batchSize,chs):
+def plot(hist,timestr,optimizerName,lossName, patchSize, epochNum, batchSize,chs):
     plt.figure()
     train_loss = hist['loss']
     val_loss = hist['val_loss']
@@ -40,10 +40,10 @@ def plot(hist,optimizerName,lossName, patchSize, epochNum, batchSize,chs):
     plt.legend()
     plt.xticks(x_ticks)
     plt.yticks(y_ticks_loss)
-    plt.title('OP={} LN={} PS={} Epochs={} Batch={}'.format(optimizerName,lossName,patchSize,epochNum, batchSize))
+    plt.title('OP={} LN={} PS={} Batch={}'.format(optimizerName,lossName,patchSize,batchSize))
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
-    fig_name = 'loss_{}_{}_{}_{}_{}_{}.png'.format(optimizerName,lossName,patchSize,epochNum,batchSize,chs)
+    fig_name = '{}_loss_{}_{}_{}_{}_{}.png'.format(timestr,optimizerName,lossName,patchSize,batchSize,chs)
     plt.savefig(fig_name)
     plt.close()
 
@@ -86,10 +86,10 @@ def plot(hist,optimizerName,lossName, patchSize, epochNum, batchSize,chs):
     plt.legend()  
     plt.xticks(x_ticks)
     plt.yticks(y_ticks)
-    plt.title('OP={} LN={} PS={} Epochs={} Batch={}'.format(optimizerName,lossName,patchSize,epochNum, batchSize,chs))
+    plt.title('OP={} LN={} Epochs={} Batch={}'.format(optimizerName,lossName,patchSize,batchSize))
     plt.xlabel('Epochs')
     plt.ylabel('recall')
-    fig_name = 'recall_{}_{}_{}_{}_{}_{}.png'.format(optimizerName,lossName,patchSize,epochNum,batchSize,chs)
+    fig_name = '{}_recall_{}_{}_{}_{}_{}.png'.format(timestr,optimizerName,lossName,patchSize,batchSize,chs)
     plt.savefig(fig_name)
     plt.close()
 
@@ -101,10 +101,10 @@ def plot(hist,optimizerName,lossName, patchSize, epochNum, batchSize,chs):
     plt.legend()    
     plt.xticks(x_ticks)
     plt.yticks(y_ticks)
-    plt.title('OP={} LN={} PS={} Epochs={} Batch={}'.format(optimizerName,lossName,patchSize,epochNum, batchSize))
+    plt.title('OP={} LN={} PS={} Batch={}'.format(optimizerName,lossName,patchSize,batchSize))
     plt.xlabel('Epochs')
     plt.ylabel('IoU')
-    fig_name = 'IoU_{}_{}_{}_{}_{}_{}.png'.format(optimizerName,lossName,patchSize,epochNum,batchSize,chs)
+    fig_name = '{}_IoU_{}_{}_{}_{}_{}.png'.format(timestr,optimizerName,lossName,patchSize,batchSize,chs)
     plt.savefig(fig_name)
     plt.close()
     
@@ -116,9 +116,9 @@ def plot(hist,optimizerName,lossName, patchSize, epochNum, batchSize,chs):
     plt.legend()   
     plt.xticks(x_ticks)
     plt.yticks(y_ticks)
-    plt.title('OP={} LN={} PS={} Epochs={} Batch={}'.format(optimizerName,lossName,patchSize,epochNum, batchSize))
+    plt.title('OP={} LN={} PS={} Batch={}'.format(optimizerName,lossName,patchSize,batchSize))
     plt.xlabel('Epochs')
     plt.ylabel('precision')
-    fig_name = 'precision_{}_{}_{}_{}_{}_{}.png'.format(optimizerName,lossName,patchSize,epochNum,batchSize,chs)
+    fig_name = '{}_precision_{}_{}_{}_{}_{}.png'.format(timestr,optimizerName,lossName,patchSize,batchSize,chs)
     plt.savefig(fig_name)
     plt.close()
