@@ -67,14 +67,14 @@ class DataGenerator():
             BATCH_SIZE (int): Number of patches to generate (sampled independently). 8
         """
         patches = []
-        # for i in range(BATCH_SIZE):
-        #     frame = np.random.choice(self.frames,p=percentages)
-        #     patch = frame.random_patch(self.patch_size)
-        #     patches.append(patch)
-        subframes = np.random.choice(self.frames,BATCH_SIZE,p=percentages,replace=False)
-        for frame in subframes:
+        for i in range(BATCH_SIZE):
+            frame = np.random.choice(self.frames,p=percentages)
             patch = frame.random_patch(self.patch_size)
             patches.append(patch)
+        # subframes = np.random.choice(self.frames,BATCH_SIZE,p=percentages,replace=False)
+        # for frame in subframes:
+        #     patch = frame.random_patch(self.patch_size)
+        #     patches.append(patch)
 #             while True:
 #                 patch = frame.random_patch(self.patch_size)
 #                 if patch[...,self.annotation_channel].any()>0:
