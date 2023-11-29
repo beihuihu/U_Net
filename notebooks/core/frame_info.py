@@ -6,22 +6,7 @@
 import numpy as np
 import os  
 from PIL import Image
-from imgaug import augmenters as iaa
 
-def imageAugmentationWithIAA():
-    sometimes = lambda aug, prob=0.5  : iaa.Sometimes(prob, aug)
-    seq = iaa.Sequential([
-        # Basic aug without changing any values
-        iaa.Fliplr(0.5),  # horizontally flip 50% of all images 左右翻转
-        iaa.Flipud(0.5),  # vertically flip 50% of all images 上下翻转
-        sometimes(iaa.Crop(percent=(0, 0.1))),  # random crops
-        sometimes(iaa.LinearContrast((0.3, 1.2)), 0.3),
-        sometimes(iaa.PiecewiseAffine(0.05), 0.3),
-        sometimes(iaa.PerspectiveTransform(0.01), 0.1)
-    ],
-        random_order=True)
-    return seq
- 
 # Each area (NDWI, annotation) is represented as an Frame
 class FrameInfo:
     """ Defines a frame, includes its constituent images, annotation.
