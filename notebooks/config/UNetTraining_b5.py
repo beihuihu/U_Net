@@ -13,8 +13,8 @@ class Configuration:
         # self.base_dir = r'D:\lakemapping\U_Net'
         # self.dataset_dir=r'D:\lakemapping\2_dataset\patchesReshape600'
         # self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
-        self.base_dir = r'/media/nkd/backup/5_lakemapping/U_Net'
-        self.dataset_dir=r'/media/nkd/backup/5_lakemapping/sample635_12/patchesReshape'
+        self.base_dir = r'/home/nkd/hbh/U_Net'
+        self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
         self.image_type = '.png'       
         self.NDWI_fn = 'ndwi'
         self.red_fn = 'red'
@@ -41,4 +41,5 @@ class Configuration:
         self.VALID_IMG_COUNT = 67#186       
         # maximum number of steps_per_epoch in training
         self.MAX_TRAIN_STEPS = 217#534 #steps_per_epoch=(num_train/batch_size)
-        self.model_path = os.path.join(self.base_dir, 'saved_models/UNet') 
+        self.model_path = r'/home/nkd/hbh/saved_models'
+        # self.model_path = os.path.join(self.base_dir, 'saved_models/UNet') 
