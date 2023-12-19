@@ -14,10 +14,10 @@ def imageAugmentationWithIAA():
     seq = iaa.Sequential([
         # Basic aug without changing any values
         iaa.Fliplr(0.5),  # horizontally flip 50% of all images 
-        iaa.Flipud(0.2),  # vertically flip 20% of all images 
+        iaa.Flipud(0.5),  # vertically flip 20% of all images 
         sometimes(iaa.Crop(percent=(0, 0.1))),  # random crops
-        sometimes(iaa.PiecewiseAffine(0.05), 0.3),
-        sometimes(iaa.PerspectiveTransform(0.01), 0.1)
+#         sometimes(iaa.PiecewiseAffine(0.05), 0.3),
+#         sometimes(iaa.PerspectiveTransform(0.01), 0.1)
     ],
         random_order=True)
     return seq
