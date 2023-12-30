@@ -11,7 +11,8 @@ class Configuration:
         # In most cases, they will take the same value as in the config/Preprocessing.py
         
         self.base_dir = r'D:\lakemapping'
-        self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
+        # self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
+        self.dataset_dir=r'J:\5_lakemapping\patchesReshape'
 #         self.base_dir = r'/home/nkd/hbh/U_Net'
 #         self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
         self.image_type = '.tif'     
@@ -19,14 +20,16 @@ class Configuration:
         self.image_fn = 'pad_image'
         self.annotation_fn = 'annotation'
         self.type_num=6
-        self.input_size = (696,696,5) # Height * Width * (Input or Output) channels  
-        self.output_size = (512,512,1)
+#         self.input_size = (696,696,5) # Height * Width * (Input or Output) channels  
+#         self.output_size = (512,512,1)
+        self.input_size = (572,572,5) # Height * Width * (Input or Output) channels  
+        self.output_size = (388,388,1)
         self.step_size = (512,512)# # When stratergy == sequential, then you need the step_size as well
         
         # Probability with which the generated patches should be normalized  0 -> don't normalize,    1 -> normalize all 
         self.normalize = 0
         # Shape of the input data, height*width*channel; Here channel is NDWI
-        self.input_shape = (696,696,5)
+        self.input_shape = (572,572,5)
         self.input_image_channel = [0,1,2,3,4]
         self.input_label_channel = [5]
 
