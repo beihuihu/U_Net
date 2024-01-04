@@ -15,26 +15,28 @@ class Configuration:
         # self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
         self.base_dir = r'/home/nkd/hbh/U_Net'
         self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
-        self.image_type = '.png'       
+        self.image_type = '.tif'       
+        self.ann_type = '.png'
         self.NDWI_fn = 'ndwi'
         self.red_fn = 'red'
         self.blue_fn = 'blue'
         self.green_fn = 'green'
         self.swir_fn = 'swir'
         self.annotation_fn = 'annotation'
+        self.image_fn = 'image'
         self.type_num=6
-        self.patch_size = (512,512,6) # Height * Width * (Input or Output) channels  
-        self.step_size = (512,512)# # When stratergy == sequential, then you need the step_size as well
+        self.patch_size = (576,576,6) # Height * Width * (Input or Output) channels  
+        self.step_size = (576,576)# # When stratergy == sequential, then you need the step_size as well
         
         # Probability with which the generated patches should be normalized  0 -> don't normalize,    1 -> normalize all 
         self.normalize = 0
         # Shape of the input data, height*width*channel; Here channel is NDWI
-        self.input_shape = (512,512,5)
+        self.input_shape = (576,576,5)
         self.input_image_channel = [0,1,2,3,4]
         self.input_label_channel = [5]
 
         # CNN model related variables used in the notebook
-        self.BATCH_SIZE = 32
+        self.BATCH_SIZE = 16
         self.NB_EPOCHS = 150
 
         # number of validation images to use

@@ -21,7 +21,7 @@ class Configuration:
         self.band_num=5
         self.ignore_edge_width=100
         # self.trained_model_path = r'D:\lakemapping\U_Net\saved_models\UNet\lakes_20231111-1239_AdaDelta_dice_loss_0123_512_percentages.h5'
-        self.trained_model_path = r'D:\lakemapping\5_saved_models\lakes_20231202-2055_AdaDelta_dice_loss_012345_512.h5'
+        self.trained_model_path = r'/home/nkd/hbh/saved_models/lakes_20240101-2240_AdaDelta_dice_loss_012345_576.h5'
         print('self.trained_model_path:', self.trained_model_path)
         
         self.output_image_type = '.tif'
@@ -34,7 +34,7 @@ class Configuration:
         self.output_dtype='uint8'
 
         # Variables related to batches and model
-        self.BATCH_SIZE =32# Depends upon GPU memory and WIDTH and HEIGHT (Note: Batch_size for prediction can be different then for training.
-        self.WIDTH=512 # Should be same as the WIDTH used for training the model
-        self.HEIGHT=512 # Should be same as the HEIGHT used for training the model
-        self.STRIDE=256 # STRIDE = WIDTH   means no overlap；  STRIDE = WIDTH/2   means 50 % overlap in prediction 
+        self.BATCH_SIZE =16# Depends upon GPU memory and WIDTH and HEIGHT (Note: Batch_size for prediction can be different then for training.
+        self.WIDTH=576 # Should be same as the WIDTH used for training the model
+        self.HEIGHT=576 # Should be same as the HEIGHT used for training the model
+        self.STRIDE=288 # STRIDE = WIDTH   means no overlap；  STRIDE = WIDTH/2   means 50 % overlap in prediction 

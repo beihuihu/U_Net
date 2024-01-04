@@ -87,7 +87,7 @@ def IoU(y_t, y_pred):#the Intersection-Over-Union metric.
     tp = true_positives(y_t, y_pred)
     fp = false_positives(y_t, y_pred)
     fn = false_negatives(y_t, y_pred)
-    return K.sum(tp)/(K.sum(tp)+K.sum(fp)+K.sum(fn))
+    return K.sum(tp)/(K.sum(tp)+K.sum(fp)+K.sum(fn)+K.epsilon())
     
 
 def recall(y_t, y_pred):#recall = TP / (TP + FN)
@@ -101,3 +101,8 @@ def precision(y_t, y_pred):
     tp = true_positives(y_t, y_pred)
     fp = false_positives(y_t, y_pred)
     return K.sum(tp) / (K.sum(tp) + K.sum(fp)+ K.epsilon())
+
+def F1_score(y_t, y_pred):
+    re = recall(y_t, y_pred)
+    pr = precision(y_t, y_pred)
+    return 2*pr*re/(re+pr+K.epsilon())
