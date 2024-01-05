@@ -3,6 +3,7 @@
 import matplotlib.pyplot as plt  # plotting tools
 from matplotlib.patches import Polygon
 import numpy as np
+import earthpy.plot as ep
 
 def display_images(img,ann,pad,outout_size, titles=None, cmap=None, norm=None, interpolation=None):
     """Display the given set of images, optionally with titles.
@@ -29,7 +30,7 @@ def display_images(img,ann,pad,outout_size, titles=None, cmap=None, norm=None, i
 #     plt.suptitle(titles)
 #     plt.show()
 
-def display_images_pre(img,ann,pre,pad,outout_size, titles=None, cmap=None, norm=None, interpolation=None):
+def display_images_pre(img,ann,pre,pad,output_size, fn=None,titles=None, cmap=None, norm=None, interpolation=None):
     """Display the given set of images, optionally with titles.
     images: array of image tensors in Batch * Height * Width * Channel format.
     titles: optional. A list of titles to display with each image.
@@ -37,49 +38,83 @@ def display_images_pre(img,ann,pre,pad,outout_size, titles=None, cmap=None, norm
     norm: Optional. A Normalize instance to map values to colors.
     interpolation: Optional. Image interpolation to use for display.
     """
-    cols = img.shape[-1] + 2
+    cols = 5
     rows = img.shape[0]
 #     titles = titles if titles is not None else [""] * (rows*cols)
 
-    plt.figure(figsize=(12, 12 * rows // cols))
-    for i in range(rows):
-        for j in range(cols -2):
-            plt.subplot(rows, cols, (i*cols) + j + 1 )
-            plt.axis('off')
-            plt.imshow(img[i,pad:outout_size+pad,pad:outout_size+pad,j], cmap=cmap, norm=norm, interpolation=interpolation)#[i,92:608,92:608,j]
-        plt.subplot(rows, cols, (i*cols) + cols - 1)
-        plt.axis('off')
-        plt.imshow(ann[i], cmap=cmap, norm=norm, interpolation=interpolation)
-
-        plt.subplot(rows, cols, (i*cols) + cols)
-        plt.axis('off')
-        plt.imshow(pre[i], cmap=cmap, norm=norm, interpolation=interpolation)
-#             plt.title(titles[(i*cols) + j ])
-#     plt.suptitle(titles)
-#     plt.show()
-
-def display_images_2(img, titles=None, cmap=None, norm=None, interpolation=None):
-    """Display the given set of images, optionally with titles.
-    images: array of image tensors in Batch * Height * Width * Channel format.
-    titles: optional. A list of titles to display with each image.
-    cmap: Optional. Color map to use. For example, "Blues".
-    norm: Optional. A Normalize instance to map values to colors.
-    interpolation: Optional. Image interpolation to use for display.
-    """
-    cols = img.shape[-1]
-    rows = img.shape[0]
-#     titles = titles if titles is not None else [""] * (rows*cols)
-
-    plt.figure(figsize=(14, 14 * rows // cols))
+    plt.figure(figsize=(15, 15 * rows // cols),dpi=150)
+    plt.subplots_adjust(left=0.1,bottom=0.1,right=0.9,top=0.9,wspace=0.05,hspace=0.05)
+#     plt.suptitle(title,x=0.5,y=0.89,fontsize=18)
     for i in range(rows):
         for j in range(cols):
-            plt.subplot(rows, cols, (i*cols) + j + 1 )
-            plt.axis('off')
-            plt.imshow(img[i,...,j], cmap=cmap, norm=norm, interpolation=interpolation)
-    #         plt.title(titles[(i*cols) + j ])
-    # plt.suptitle(titles)
-    # plt.show()
+            ax=plt.subplot(rows, cols, (i*cols) + j + 1 )
+            ax.set_axis_off()
+            if i==0:
+                ax.set_title(titles[j],fontsize=12)
+            if j==0:
+                plt.imshow(img[i,...,j], cmap=cmap, norm=norm, interpolation=interpolation)
+                plt.hlines(y=pad,xmin=pad,xmax=pad+output_size,color='red',linewidth=1)
+                plt.hlines(y=pad+output_size,xmin=pad,xmax=pad+output_size,color='red',linewidth=1)
+                plt.vlines(x=pad,ymin=pad,ymax=pad+output_size,color='red',linewidth=1)
+                plt.vlines(x=pad+output_size,ymin=pad,ymax=pad+output_size,color='red',linewidth=1)
+            elif j==1:
+                rgb=np.transpose(img[i,...,j:j+3], axes=(2,0,1))
+                ep.plot_rgb(rgb,ax=ax, stretch=True,str_clip=0.5)
+                plt.hlines(y=pad,xmin=pad,xmax=pad+output_size,color='red',linewidth=1)
+                plt.hlines(y=pad+output_size,xmin=pad,xmax=pad+output_size,color='red',linewidth=1)
+                plt.vlines(x=pad,ymin=pad,ymax=pad+output_size,color='red',linewidth=1)
+                plt.vlines(x=pad+output_size,ymin=pad,ymax=pad+output_size,color='red',linewidth=1)
+            elif j==2:
+                plt.imshow(img[i,...,j+2], norm=norm,interpolation=interpolation)
+                plt.hlines(y=pad,xmin=pad,xmax=pad+output_size,color='red',linewidth=1)
+                plt.hlines(y=pad+output_size,xmin=pad,xmax=pad+output_size,color='red',linewidth=1)
+                plt.vlines(x=pad,ymin=pad,ymax=pad+output_size,color='red',linewidth=1)
+                plt.vlines(x=pad+output_size,ymin=pad,ymax=pad+output_size,color='red',linewidth=1)
+            elif j==3:
+                plt.imshow(ann[i,:output_size,:output_size], cmap=cmap, norm=norm, interpolation=interpolation)
+#                 plt.xlim(-pad,pad+output_size)
+#                 plt.ylim(pad+output_size,-pad)
+            elif j==4:
+                plt.imshow(pre[i,:output_size,:output_size], cmap=cmap, norm=norm, interpolation=interpolation)
+#                 plt.xlim(-pad,pad+output_size)
+#                 plt.ylim(pad+output_size,-pad)
+    fig_name=r'D:\lakemapping\4_predition\sample748\image\{}.png'.format(fn)
+    plt.savefig(fig_name,bbox_inches='tight',pad_inches = 0.1)
+    plt.close()
 
+def display_images_2(img,pad,output_size, fn=None,titles=None, cmap=None, norm=None, interpolation=None):
+    """Display the given set of images, optionally with titles.
+    images: array of image tensors in Batch * Height * Width * Channel format.
+    titles: optional. A list of titles to display with each image.
+    cmap: Optional. Color map to use. For example, "Blues".
+    norm: Optional. A Normalize instance to map values to colors.
+    interpolation: Optional. Image interpolation to use for display.
+    """
+    cols = 5
+    rows = img.shape[0]
+#     titles = titles if titles is not None else [""] * (rows*cols)
+
+    plt.figure(figsize=(15, 15 * rows // cols),dpi=150)
+    plt.subplots_adjust(left=0.1,bottom=0.1,right=0.9,top=0.9,wspace=0.05,hspace=0.05)
+#     plt.suptitle(title,x=0.5,y=0.89,fontsize=18)
+    plt.tight_layout()
+    for i in range(rows):
+        for j in range(cols):
+            ax=plt.subplot(rows, cols, (i*cols) + j + 1 )
+            ax.set_axis_off()
+            if i==0:
+                ax.set_title(titles[j],fontsize=12)
+            if j==0:
+                plt.imshow(img[i,...,j], cmap=cmap, norm=norm, interpolation=interpolation)
+            elif j==1:
+                rgb=np.transpose(img[i,...,j:j+3], axes=(2,0,1))
+                ep.plot_rgb(rgb,ax=ax, stretch=True,str_clip=0.5)
+            else:
+                plt.imshow(img[i,...,j+2], cmap=cmap, norm=norm, interpolation=interpolation)
+    fig_name=r'D:\lakemapping\4_predition\sample748\image\{}.png'.format(fn)
+    plt.savefig(fig_name,bbox_inches='tight',pad_inches = 0.1)
+    plt.close()
+    
 def plot(hist,timestr,optimizerName,lossName, patchSize, epochNum, batchSize,chs):
     plt.figure()
     train_loss = hist['loss']
@@ -100,6 +135,7 @@ def plot(hist,timestr,optimizerName,lossName, patchSize, epochNum, batchSize,chs
     fig_name = '{}_loss_{}_{}_{}_{}_{}.png'.format(timestr,optimizerName,lossName,patchSize,batchSize,chs)
     plt.savefig(fig_name)
     plt.close()
+    
 
 #     dice_loss = hist['dice_loss'] 
 #     val_dice_loss = hist['val_dice_loss']

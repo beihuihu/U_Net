@@ -10,18 +10,18 @@ class Configuration:
         # For reading the NDWI and annotated images generated in the Preprocessing step.
         # In most cases, they will take the same value as in the config/Preprocessing.py
         
-        # self.base_dir = r'D:\lakemapping\U_Net'
-        # self.dataset_dir=r'D:\lakemapping\2_dataset\patchesReshape600'
-        # self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
-        self.base_dir = r'/home/nkd/hbh/U_Net'
-        self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
+        self.base_dir = r'D:\lakemapping'
+        self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
+#         self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
+#         self.base_dir = r'/home/nkd/hbh/U_Net'
+#         self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
         self.image_type = '.tif'       
         self.ann_type = '.png'
-        self.NDWI_fn = 'ndwi'
-        self.red_fn = 'red'
-        self.blue_fn = 'blue'
-        self.green_fn = 'green'
-        self.swir_fn = 'swir'
+#         self.NDWI_fn = 'ndwi'
+#         self.red_fn = 'red'
+#         self.blue_fn = 'blue'
+#         self.green_fn = 'green'
+#         self.swir_fn = 'swir'
         self.annotation_fn = 'annotation'
         self.image_fn = 'image'
         self.type_num=6
@@ -43,5 +43,5 @@ class Configuration:
         self.VALID_IMG_COUNT = 67#186       
         # maximum number of steps_per_epoch in training
         self.MAX_TRAIN_STEPS = 217#534 #steps_per_epoch=(num_train/batch_size)
-        self.model_path = r'/home/nkd/hbh/saved_models'
-        # self.model_path = os.path.join(self.base_dir, 'saved_models/UNet') 
+#         self.model_path = r'/home/nkd/hbh/saved_models'
+        self.model_path = os.path.join(self.base_dir, '5_saved_models') 

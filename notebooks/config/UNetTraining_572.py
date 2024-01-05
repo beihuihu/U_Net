@@ -10,11 +10,11 @@ class Configuration:
         # For reading the NDWI and annotated images generated in the Preprocessing step.
         # In most cases, they will take the same value as in the config/Preprocessing.py
         
-        # self.base_dir = r'D:\lakemapping'
-        # self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
-        # self.dataset_dir=r'J:\5_lakemapping\patchesReshape'
-        self.base_dir = r'/home/nkd/hbh/U_Net'
-        self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
+        self.base_dir = r'D:\lakemapping'
+        self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
+#         self.dataset_dir=r'J:\5_lakemapping\patchesReshape'
+#         self.base_dir = r'/home/nkd/hbh/U_Net'
+#         self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
         self.image_type = '.tif'     
         self.ann_type = '.png'
         self.image_fn = 'pad_image'
