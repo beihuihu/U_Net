@@ -3,9 +3,9 @@
 import matplotlib.pyplot as plt  # plotting tools
 from matplotlib.patches import Polygon
 import numpy as np
-import earthpy.plot as ep
+# import earthpy.plot as ep
 
-def display_images(img,ann,pad,outout_size, titles=None, cmap=None, norm=None, interpolation=None):
+def display_images(img,ann,pre=None,pad=0,output_size=512, fn=None,titles=None,save=False, cmap=None, norm=None, interpolation=None):
     """Display the given set of images, optionally with titles.
     images: array of image tensors in Batch * Height * Width * Channel format.
     titles: optional. A list of titles to display with each image.
@@ -13,43 +13,19 @@ def display_images(img,ann,pad,outout_size, titles=None, cmap=None, norm=None, i
     norm: Optional. A Normalize instance to map values to colors.
     interpolation: Optional. Image interpolation to use for display.
     """
-    cols = img.shape[-1] + 1
+    if pre!=None:
+        cols = 5
+    else:
+        cols = 4
     rows = img.shape[0]
-#     titles = titles if titles is not None else [""] * (rows*cols)
 
-    plt.figure(figsize=(12, 12 * rows // cols))
-    for i in range(rows):
-        for j in range(cols -1):
-            plt.subplot(rows, cols, (i*cols) + j + 1 )
-            plt.axis('off')
-            plt.imshow(img[i,pad:outout_size+pad,pad:outout_size+pad,j], cmap=cmap, norm=norm, interpolation=interpolation)#[i,92:608,92:608,j]
-        plt.subplot(rows, cols, (i*cols) + cols)
-        plt.axis('off')
-        plt.imshow(ann[i], cmap=cmap, norm=norm, interpolation=interpolation)
-#             plt.title(titles[(i*cols) + j ])
-#     plt.suptitle(titles)
-#     plt.show()
-
-def display_images_pre(img,ann,pre,pad,output_size, fn=None,titles=None, cmap=None, norm=None, interpolation=None):
-    """Display the given set of images, optionally with titles.
-    images: array of image tensors in Batch * Height * Width * Channel format.
-    titles: optional. A list of titles to display with each image.
-    cmap: Optional. Color map to use. For example, "Blues".
-    norm: Optional. A Normalize instance to map values to colors.
-    interpolation: Optional. Image interpolation to use for display.
-    """
-    cols = 5
-    rows = img.shape[0]
-#     titles = titles if titles is not None else [""] * (rows*cols)
-
-    plt.figure(figsize=(15, 15 * rows // cols),dpi=150)
+    plt.figure(figsize=(20, 20 * rows // cols),dpi=150)
     plt.subplots_adjust(left=0.1,bottom=0.1,right=0.9,top=0.9,wspace=0.05,hspace=0.05)
-#     plt.suptitle(title,x=0.5,y=0.89,fontsize=18)
     for i in range(rows):
         for j in range(cols):
             ax=plt.subplot(rows, cols, (i*cols) + j + 1 )
             ax.set_axis_off()
-            if i==0:
+            if (i==0) and (titles!=None):
                 ax.set_title(titles[j],fontsize=12)
             if j==0:
                 plt.imshow(img[i,...,j], cmap=cmap, norm=norm, interpolation=interpolation)
@@ -72,15 +48,17 @@ def display_images_pre(img,ann,pre,pad,output_size, fn=None,titles=None, cmap=No
                 plt.vlines(x=pad+output_size,ymin=pad,ymax=pad+output_size,color='red',linewidth=1)
             elif j==3:
                 plt.imshow(ann[i,:output_size,:output_size], cmap=cmap, norm=norm, interpolation=interpolation)
-#                 plt.xlim(-pad,pad+output_size)
-#                 plt.ylim(pad+output_size,-pad)
-            elif j==4:
+                if pre==None:
+                    plt.xlim(-pad,pad+output_size)
+                    plt.ylim(pad+output_size,-pad)
+            else:
                 plt.imshow(pre[i,:output_size,:output_size], cmap=cmap, norm=norm, interpolation=interpolation)
 #                 plt.xlim(-pad,pad+output_size)
 #                 plt.ylim(pad+output_size,-pad)
-    fig_name=r'D:\lakemapping\4_predition\sample748\image\{}.png'.format(fn)
-    plt.savefig(fig_name,bbox_inches='tight',pad_inches = 0.1)
-    plt.close()
+    if save:
+        fig_name=r'D:\lakemapping\4_predition\sample748\image\{}.png'.format(fn)
+        plt.savefig(fig_name,bbox_inches='tight',pad_inches = 0.1)
+        plt.close()
 
 def display_images_2(img,pad,output_size, fn=None,titles=None, cmap=None, norm=None, interpolation=None):
     """Display the given set of images, optionally with titles.
