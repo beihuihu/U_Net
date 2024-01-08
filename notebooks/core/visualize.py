@@ -3,9 +3,9 @@
 import matplotlib.pyplot as plt  # plotting tools
 from matplotlib.patches import Polygon
 import numpy as np
-# import earthpy.plot as ep
+import earthpy.plot as ep
 
-def display_images(img,ann,pre=None,pad=0,output_size=512, fn=None,titles=None,save=False, cmap=None, norm=None, interpolation=None):
+def display_images(img,ann,pre=None,pad=0,output_size=512, fn=None,titles=None,cmap=None, norm=None, interpolation=None):
     """Display the given set of images, optionally with titles.
     images: array of image tensors in Batch * Height * Width * Channel format.
     titles: optional. A list of titles to display with each image.
@@ -55,12 +55,11 @@ def display_images(img,ann,pre=None,pad=0,output_size=512, fn=None,titles=None,s
                 plt.imshow(pre[i,:output_size,:output_size], cmap=cmap, norm=norm, interpolation=interpolation)
 #                 plt.xlim(-pad,pad+output_size)
 #                 plt.ylim(pad+output_size,-pad)
-    if save:
-        fig_name=r'D:\lakemapping\4_predition\sample748\image\{}.png'.format(fn)
-        plt.savefig(fig_name,bbox_inches='tight',pad_inches = 0.1)
+    if fn!=None:
+        plt.savefig(fn,bbox_inches='tight',pad_inches = 0.1)
         plt.close()
 
-def display_images_2(img,pad,output_size, fn=None,titles=None, cmap=None, norm=None, interpolation=None):
+def display_images_2(img,pad=0,output_size=512, fn=None,titles=None, cmap=None, norm=None, interpolation=None):
     """Display the given set of images, optionally with titles.
     images: array of image tensors in Batch * Height * Width * Channel format.
     titles: optional. A list of titles to display with each image.
@@ -68,7 +67,7 @@ def display_images_2(img,pad,output_size, fn=None,titles=None, cmap=None, norm=N
     norm: Optional. A Normalize instance to map values to colors.
     interpolation: Optional. Image interpolation to use for display.
     """
-    cols = 5
+    cols = img.shape[-1]-2
     rows = img.shape[0]
 #     titles = titles if titles is not None else [""] * (rows*cols)
 
@@ -80,7 +79,7 @@ def display_images_2(img,pad,output_size, fn=None,titles=None, cmap=None, norm=N
         for j in range(cols):
             ax=plt.subplot(rows, cols, (i*cols) + j + 1 )
             ax.set_axis_off()
-            if i==0:
+            if i==0 and (titles!=None):
                 ax.set_title(titles[j],fontsize=12)
             if j==0:
                 plt.imshow(img[i,...,j], cmap=cmap, norm=norm, interpolation=interpolation)
@@ -89,9 +88,13 @@ def display_images_2(img,pad,output_size, fn=None,titles=None, cmap=None, norm=N
                 ep.plot_rgb(rgb,ax=ax, stretch=True,str_clip=0.5)
             else:
                 plt.imshow(img[i,...,j+2], cmap=cmap, norm=norm, interpolation=interpolation)
-    fig_name=r'D:\lakemapping\4_predition\sample748\image\{}.png'.format(fn)
-    plt.savefig(fig_name,bbox_inches='tight',pad_inches = 0.1)
-    plt.close()
+            plt.hlines(y=pad,xmin=pad,xmax=pad+output_size,color='red',linewidth=1)
+            plt.hlines(y=pad+output_size,xmin=pad,xmax=pad+output_size,color='red',linewidth=1)
+            plt.vlines(x=pad,ymin=pad,ymax=pad+output_size,color='red',linewidth=1)
+            plt.vlines(x=pad+output_size,ymin=pad,ymax=pad+output_size,color='red',linewidth=1)
+    if fn!=None:
+        plt.savefig(fn,bbox_inches='tight',pad_inches = 0.1)
+        plt.close()
     
 def plot(hist,timestr,optimizerName,lossName, patchSize, epochNum, batchSize,chs):
     plt.figure()
@@ -146,21 +149,6 @@ def plot(hist,timestr,optimizerName,lossName, patchSize, epochNum, batchSize,chs
 #     plt.savefig(fig_name)
 #     plt.close()
 
-    recall = hist['recall'] 
-    val_recall = hist['val_recall']
-    plt.plot(epochs, recall, 'b', label='Training recall')
-    plt.plot(epochs, val_recall, 'r', label='Validation recall')
-    plt.grid(color='gray', linestyle='--')
-    plt.legend()  
-    plt.xticks(x_ticks)
-    plt.yticks(y_ticks)
-    plt.title('OP={} LN={} Epochs={} Batch={}'.format(optimizerName,lossName,patchSize,batchSize))
-    plt.xlabel('Epochs')
-    plt.ylabel('recall')
-    fig_name = '{}_recall_{}_{}_{}_{}_{}.png'.format(timestr,optimizerName,lossName,patchSize,batchSize,chs)
-    plt.savefig(fig_name)
-    plt.close()
-
     IoU = hist['IoU'] 
     val_IoU = hist['val_IoU']
     plt.plot(epochs, IoU, 'b', label='Training IoU')
@@ -190,7 +178,23 @@ def plot(hist,timestr,optimizerName,lossName, patchSize, epochNum, batchSize,chs
     fig_name = '{}_F1_score_{}_{}_{}_{}_{}.png'.format(timestr,optimizerName,lossName,patchSize,batchSize,chs)
     plt.savefig(fig_name)
     plt.close()
-    
+
+
+    recall = hist['recall'] 
+    val_recall = hist['val_recall']
+    plt.plot(epochs, recall, 'b', label='Training recall')
+    plt.plot(epochs, val_recall, 'r', label='Validation recall')
+    plt.grid(color='gray', linestyle='--')
+    plt.legend()  
+    plt.xticks(x_ticks)
+    plt.yticks(y_ticks)
+    plt.title('OP={} LN={} Epochs={} Batch={}'.format(optimizerName,lossName,patchSize,batchSize))
+    plt.xlabel('Epochs')
+    plt.ylabel('recall')
+    fig_name = '{}_recall_{}_{}_{}_{}_{}.png'.format(timestr,optimizerName,lossName,patchSize,batchSize,chs)
+    plt.savefig(fig_name)
+    plt.close()
+
     precision = hist['precision'] 
     val_precision = hist['val_precision']
     plt.plot(epochs, precision, 'b', label='Training precision')

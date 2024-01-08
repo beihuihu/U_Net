@@ -11,21 +11,27 @@ class Configuration:
         # In most cases, they will take the same value as in the config/Preprocessing.py
         
         # self.base_dir = r'D:\lakemapping'
-        self.base_dir = r'G:\5_lakemapping'
-        self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
-#         self.base_dir = r'/home/nkd/hbh/U_Net'
-#         self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
+        # self.base_dir = r'G:\5_lakemapping'
+        # self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
+        self.base_dir = r'/home/nkd/hbh'
+        self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
         self.image_type = '.tif'     
         self.ann_type = '.png'
         self.image_fn = 'image'
         self.annotation_fn = 'annotation'
         self.type_num=6
 
-        self.input_size = (572,572,5) # Height * Width * (Input or Output) channels  
-        self.output_size = (388,388,1)
-        self.patch_size = (576,576,6)
-        self.step_size = (576,576)
-        self.input_shape = (572,572,5)
+        # self.input_size = (572,572,5) # Height * Width * (Input or Output) channels  
+        # self.output_size = (388,388,1)
+        # self.patch_size = (576,576,6)
+        # self.step_size = (576,576)
+        # self.input_shape = (572,572,5)
+
+        self.input_size = (508,508,5) # Height * Width * (Input or Output) channels  
+        self.output_size = (324,324,1)
+        self.patch_size = (512,512,6)
+        self.step_size = (512,512)
+        self.input_shape = (508,508,5)
 
         # Probability with which the generated patches should be normalized  0 -> don't normalize,    1 -> normalize all 
         self.normalize = 0
