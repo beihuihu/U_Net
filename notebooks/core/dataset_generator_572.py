@@ -15,7 +15,7 @@ def imageAugmentationWithIAA():
         # Basic aug without changing any values
         iaa.Fliplr(0.5),  # horizontally flip 50% of all images 
         iaa.Flipud(0.5),  # vertically flip 20% of all images 
-        sometimes(iaa.Crop(percent=(0, 0.1))),  # random crops
+#         sometimes(iaa.Crop(percent=(0, 0.1))),  # random crops
 #         sometimes(iaa.PiecewiseAffine(0.05), 0.3),
 #         sometimes(iaa.PerspectiveTransform(0.01), 0.1)
     ],
@@ -77,7 +77,7 @@ class DataGenerator():
         ann = np.array(ann_patches)
         return img, ann
     
-    def random_generator(self, BATCH_SIZE,percentages = None, normalize = 0):
+    def random_generator(self, BATCH_SIZE,percentages, normalize = 0):
         """Generator for random patches, yields random patches from random location in randomly chosen frames.
         Args:
             BATCH_SIZE (int): Number of patches to generate in each yield (sampled independently).  

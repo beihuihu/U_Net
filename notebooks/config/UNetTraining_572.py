@@ -10,7 +10,8 @@ class Configuration:
         # For reading the NDWI and annotated images generated in the Preprocessing step.
         # In most cases, they will take the same value as in the config/Preprocessing.py
         
-        self.base_dir = r'D:\lakemapping'
+#         self.base_dir = r'D:\lakemapping'
+        self.base_dir = r'G:\5_lakemapping'
         self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
 #         self.dataset_dir=r'J:\5_lakemapping\patchesReshape'
 #         self.base_dir = r'/home/nkd/hbh/U_Net'
@@ -22,14 +23,15 @@ class Configuration:
         self.type_num=6
 #         self.input_size = (696,696,5) # Height * Width * (Input or Output) channels  
 #         self.output_size = (512,512,1)
-        # self.input_size = (572,572,5) # Height * Width * (Input or Output) channels  
-        # self.output_size = (388,388,1)
-        # self.step_size = (576,576)
-        # self.input_shape = (572,572,5)
-        self.input_size = (764,764,5) # Height * Width * (Input or Output) channels  
-        self.output_size = (580,580,1)
+        self.input_size = (572,572,5) # Height * Width * (Input or Output) channels  
+        self.output_size = (388,388,1)
         self.step_size = (576,576)
-        self.input_shape = (764,764,5)
+        self.patch_size = (576,576,6)
+        self.input_shape = (572,572,5)
+#         self.input_size = (764,764,5) # Height * Width * (Input or Output) channels  
+#         self.output_size = (580,580,1)
+#         self.step_size = (576,576)
+#         self.input_shape = (764,764,5)
         # Probability with which the generated patches should be normalized  0 -> don't normalize,    1 -> normalize all 
         self.normalize = 0
        

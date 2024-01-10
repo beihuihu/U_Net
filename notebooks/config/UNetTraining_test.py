@@ -11,10 +11,10 @@ class Configuration:
         # In most cases, they will take the same value as in the config/Preprocessing.py
         
         # self.base_dir = r'D:\lakemapping'
-        # self.base_dir = r'G:\5_lakemapping'
-        # self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
-        self.base_dir = r'/home/nkd/hbh'
-        self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
+        self.base_dir = r'G:\5_lakemapping'
+        self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
+#         self.base_dir = r'/home/nkd/hbh'
+#         self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
         self.image_type = '.tif'     
         self.ann_type = '.png'
         self.image_fn = 'image'
