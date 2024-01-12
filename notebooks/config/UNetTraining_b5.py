@@ -11,7 +11,7 @@ class Configuration:
         # In most cases, they will take the same value as in the config/Preprocessing.py
         
         # self.base_dir = r'D:\lakemapping'
-        self.base_dir = r'G:\5_lakemapping'
+        self.base_dir = r'G:\lakemapping'
         self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
 #         self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
 #         self.base_dir = r'/home/nkd/hbh'

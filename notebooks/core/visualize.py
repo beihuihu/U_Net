@@ -5,7 +5,7 @@ from matplotlib.patches import Polygon
 import numpy as np
 import earthpy.plot as ep
 
-def display_images(img,ann,pre=None,pad=0,output_size=512, fn=None,titles=None,cmap=None, norm=None, interpolation=None):
+def display_images(img,ann,pre=[],pad=0,output_size=512, fn=None,titles=None,cmap=None, norm=None, interpolation=None):
     """Display the given set of images, optionally with titles.
     images: array of image tensors in Batch * Height * Width * Channel format.
     titles: optional. A list of titles to display with each image.
@@ -13,7 +13,7 @@ def display_images(img,ann,pre=None,pad=0,output_size=512, fn=None,titles=None,c
     norm: Optional. A Normalize instance to map values to colors.
     interpolation: Optional. Image interpolation to use for display.
     """
-    if pre!=None:
+    if len(pre)!=0:
         cols = 5
     else:
         cols = 4
@@ -48,9 +48,8 @@ def display_images(img,ann,pre=None,pad=0,output_size=512, fn=None,titles=None,c
                 plt.vlines(x=pad+output_size,ymin=pad,ymax=pad+output_size,color='red',linewidth=1)
             elif j==3:
                 plt.imshow(ann[i,:output_size,:output_size], cmap=cmap, norm=norm, interpolation=interpolation)
-                if pre==None:
-                    plt.xlim(-pad,pad+output_size)
-                    plt.ylim(pad+output_size,-pad)
+                plt.xlim(-pad,pad+output_size)
+                plt.ylim(pad+output_size,-pad)
             else:
                 plt.imshow(pre[i,:output_size,:output_size], cmap=cmap, norm=norm, interpolation=interpolation)
 #                 plt.xlim(-pad,pad+output_size)
