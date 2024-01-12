@@ -20,7 +20,7 @@ class Configuration:
         self.type_num=6
         self.band_num=5
         self.ignore_edge_width=92
-        self.trained_model_path = r'D:\lakemapping\5_saved_models\lakes_20240108-2231_AdaDelta_dice_loss_012345_572.h5'
+        self.trained_model_path = r'D:\lakemapping\5_saved_models\lakes_20240110-2311_AdaDelta_dice_loss_012345_572.h5'
 #         self.trained_model_path = r'/home/nkd/hbh/saved_models/lakes_20240101-2240_AdaDelta_dice_loss_012345_576.h5'
         print('self.trained_model_path:', self.trained_model_path)
         
