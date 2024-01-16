@@ -70,7 +70,7 @@ def display_images_2(img,pad=0,output_size=512, fn=None,titles=None, cmap=None, 
     rows = img.shape[0]
 #     titles = titles if titles is not None else [""] * (rows*cols)
 
-    plt.figure(figsize=(15, 15 * rows // cols),dpi=150)
+    plt.figure(figsize=(20, 20 * rows // cols),dpi=150)
     plt.subplots_adjust(left=0.1,bottom=0.1,right=0.9,top=0.9,wspace=0.05,hspace=0.05)
 #     plt.suptitle(title,x=0.5,y=0.89,fontsize=18)
     plt.tight_layout()

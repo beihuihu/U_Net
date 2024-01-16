@@ -26,12 +26,12 @@ class Configuration:
         self.annotation_fn = 'annotation'
         self.image_fn = 'image'
         self.type_num=6
-        self.patch_size = (576,576,6) # Height * Width * (Input or Output) channels  
-        self.step_size = (576,576)# # When stratergy == sequential, then you need the step_size as well
-        self.input_shape = (576,576,5)
-#         self.patch_size = (512,512,6) # Height * Width * (Input or Output) channels  
-#         self.step_size = (512,512)# # When stratergy == sequential, then you need the step_size as well
-#         self.input_shape = (512,512,5)
+#         self.patch_size = (576,576,6) # Height * Width * (Input or Output) channels  
+#         self.step_size = (576,576)# # When stratergy == sequential, then you need the step_size as well
+#         self.input_shape = (576,576,5)
+        self.patch_size = (512,512,6) # Height * Width * (Input or Output) channels  
+        self.step_size = (512,512)# # When stratergy == sequential, then you need the step_size as well
+        self.input_shape = (512,512,5)
         
         # Probability with which the generated patches should be normalized  0 -> don't normalize,    1 -> normalize all 
         self.normalize = 0
