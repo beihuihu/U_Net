@@ -11,10 +11,10 @@ class Configuration:
         # In most cases, they will take the same value as in the config/Preprocessing.py
         
         # self.base_dir = r'D:\lakemapping'
-        self.base_dir = r'G:\lakemapping'
-        self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
-#         self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
-#         self.base_dir = r'/home/nkd/hbh'
+        # self.base_dir = r'G:\lakemapping'
+        # self.dataset_dir=os.path.join(self.base_dir,'2_dataset\patchesReshape')
+        self.base_dir = r'/home/nkd/hbh'
+        self.dataset_dir=os.path.join(self.base_dir,'patchesReshape')
 #         self.dataset_dir=r'/home/nkd/hbh/patchesReshape'
         self.image_type = '.tif'       
         self.ann_type = '.png'
@@ -25,13 +25,17 @@ class Configuration:
 #         self.swir_fn = 'swir'
         self.annotation_fn = 'annotation'
         self.image_fn = 'image'
-        self.type_num=6
-#         self.patch_size = (576,576,6) # Height * Width * (Input or Output) channels  
-#         self.step_size = (576,576)# # When stratergy == sequential, then you need the step_size as well
-#         self.input_shape = (576,576,5)
-        self.patch_size = (512,512,6) # Height * Width * (Input or Output) channels  
-        self.step_size = (512,512)# # When stratergy == sequential, then you need the step_size as well
-        self.input_shape = (512,512,5)
+        self.type_num=5
+        self.patch_size = (576,576,6) # Height * Width * (Input or Output) channels  
+        self.step_size = (576,576)# # When stratergy == sequential, then you need the step_size as well
+        self.input_shape = (576,576,5)
+        # self.patch_size = (512,512,6) # Height * Width * (Input or Output) channels  
+        # self.step_size = (512,512)# # When stratergy == sequential, then you need the step_size as well
+        # self.input_shape = (512,512,5)
+
+        #self.patch_size = (768,768,6) # Height * Width * (Input or Output) channels  
+        #self.step_size = (768,768)# # When stratergy == sequential, then you need the step_size as well
+        #self.input_shape = (768,768,5)
         
         # Probability with which the generated patches should be normalized  0 -> don't normalize,    1 -> normalize all 
         self.normalize = 0

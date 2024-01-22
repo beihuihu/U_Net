@@ -65,15 +65,15 @@ class FrameInfo:
         else:
             x = range(0, img_shape[0] - patch_size[0], step_size[0])
             #hbh: 当最后一步长度小于步长的1/3，就不走最后一步
-            # if ((img_shape[0] - patch_size[0]-x[-1]) > patch_size[0]/3) :
-            #     x=np.append(x,img_shape[0] - patch_size[0])
+            if ((img_shape[0] - patch_size[0]-x[-1]) > patch_size[0]/3) :
+                x=np.append(x,img_shape[0] - patch_size[0])
                 
         if (img_shape[1] <= patch_size[1]):
             y = [0]
         else:
             y = range(0, img_shape[1] - patch_size[1], step_size[1])
-            # if ((img_shape[1] - patch_size[1]- y[-1]) > patch_size[0]/3) :
-            #     y=np.append(y,img_shape[1] - patch_size[1])
+            if ((img_shape[1] - patch_size[1]- y[-1]) > patch_size[0]/3) :
+                y=np.append(y,img_shape[1] - patch_size[1])
 
         ic = (min(img_shape[0], patch_size[0]), min(img_shape[1], patch_size[1]))
         xy = [(i, j) for i in x for j in y]
