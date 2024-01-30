@@ -1,3 +1,0 @@
-{"training_frames": ["image_2986.tif", "image_3202.tif", "image_2883.tif", "image_5636.tif", "image_8904.tif", "image_3194.tif", "image_6252.tif", "image_4299.tif", "image_3126.tif", "image_2979.tif", "image_3159.tif", "image_4418.tif","image_17140.tif", "image_17434.tif", "image_16118.tif", "image_17481.tif", "image_18710.tif"], 
- "testing_frames": ["image_10953.tif", "image_10792.tif", "image_8555.tif","image_17883.tif", "image_17683.tif"],
- "validation_frames": ["image_6765.tif", "image_5605.tif", "image_6794.tif", "image_18725.tif", "image_6779.tif"]}
