@@ -25,7 +25,7 @@ class Configuration:
 #         self.swir_fn = 'swir'
         self.annotation_fn = 'annotation'
         self.image_fn = 'image'
-        self.type_num=5
+        self.type_num=4
         self.patch_size = (576,576,6) # Height * Width * (Input or Output) channels  
         self.step_size = (576,576)# # When stratergy == sequential, then you need the step_size as well
         self.input_shape = (576,576,5)
