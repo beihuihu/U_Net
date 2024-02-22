@@ -26,9 +26,9 @@ class Configuration:
         self.annotation_fn = 'annotation'
         self.image_fn = 'image'
         self.type_num=4
-        self.patch_size = (576,576,6) # Height * Width * (Input or Output) channels  
+        self.patch_size = (576,576,5) # Height * Width * (Input or Output) channels  
         self.step_size = (576,576)# # When stratergy == sequential, then you need the step_size as well
-        self.input_shape = (576,576,5)
+        self.input_shape = (576,576,4)
         # self.patch_size = (512,512,6) # Height * Width * (Input or Output) channels  
         # self.step_size = (512,512)# # When stratergy == sequential, then you need the step_size as well
         # self.input_shape = (512,512,5)
@@ -40,8 +40,8 @@ class Configuration:
         # Probability with which the generated patches should be normalized  0 -> don't normalize,    1 -> normalize all 
         self.normalize = 0
         # Shape of the input data, height*width*channel; Here channel is NDWI
-        self.input_image_channel = [0,1,2,3,4]
-        self.input_label_channel = [5]
+        self.input_image_channel = [0,1,2,3]
+        self.input_label_channel = [4]
 
         # CNN model related variables used in the notebook
         self.BATCH_SIZE = 16
