@@ -19,10 +19,24 @@ class Configuration:
         self.ann_type = '.png'
         self.annotation_fn = 'annotation'
         self.image_fn = 'image'
+<<<<<<< Updated upstream:notebooks/config/UNetTraining.py
         self.type_num=4
         self.patch_size = (576,576,6) # Height * Width * (Input or Output) channels  
         self.step_size = (576,576)# # When stratergy == sequential, then you need the step_size as well
         self.input_shape = (576,576,5)
+=======
+        self.type_num=5
+        self.patch_size = (576,576,6) # Height * Width * (Input or Output) channels  
+        self.step_size = (576,576)# # When stratergy == sequential, then you need the step_size as well
+        self.input_shape = (576,576,5)
+        # self.patch_size = (512,512,6) # Height * Width * (Input or Output) channels  
+        # self.step_size = (512,512)# # When stratergy == sequential, then you need the step_size as well
+        # self.input_shape = (512,512,5)
+
+        #self.patch_size = (768,768,6) # Height * Width * (Input or Output) channels  
+        #self.step_size = (768,768)# # When stratergy == sequential, then you need the step_size as well
+        #self.input_shape = (768,768,5)
+>>>>>>> Stashed changes:notebooks/config/UNetTraining_b5.py
         
         # Probability with which the generated patches should be normalized  0 -> don't normalize,    1 -> normalize all 
         self.normalize = 0
@@ -32,7 +46,7 @@ class Configuration:
 
         # CNN model related variables used in the notebook
         self.BATCH_SIZE = 16
-        self.NB_EPOCHS = 150
+        self.NB_EPOCHS = 200
 
 #         self.model_path = r'/home/nkd/hbh/saved_models'
         self.model_path = os.path.join(self.base_dir, '5_saved_models') 
